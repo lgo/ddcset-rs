@@ -30,7 +30,7 @@ jobs:
           - gcc-mingw-w64-i686
     - stage: build
       name: "Windows (64bit)"
-      install: rustup target add i686-pc-windows-gnu
+      install: rustup target add x86_64-pc-windows-gnu
       env:
         - TARGET=x86_64-pc-windows-gnu
         - BINARY_EXTENSION=.exe
@@ -43,10 +43,10 @@ script:
   - cargo build --target $TARGET --verbose --release
 deploy:
   provider: releases
-  api_key: "$GH_TOKEN"
+  github_token: "$GH_TOKEN"
   file:
   - "target/$TARGET/release/ddcset-stripped$BINARY_EXTENSION"
-  cleanup: true
+  skip_cleanup: true
   on:
     tags: true
     condition: "$TRAVIS_RUST_VERSION = stable"
