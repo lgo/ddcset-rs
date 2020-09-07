@@ -1,47 +1,54 @@
 language: rust
 rust:
   - stable
+os:
+- linux
+addons:
+  apt:
+    packages:
+    - libudev-dev
+cache:
+  - cargo
+  - apt
 jobs:
   fast_finish: true
   include:
     - stage: build
       name: "Linux (64bit)"
       env:
-        - EXE_SUFFIX=-linux64
         - BINARY_EXTENSION=
-        - CARGO_BUILD_TARGET=x86_64-unknown-linux-gnu
+        - TARGET=x86_64-unknown-linux-gnu
     - stage: build
       name: "Windows (32bit)"
+      install: rustup target add i686-pc-windows-gnu
       env:
-        - CARGO_BUILD_TARGET=i686-pc-windows-gnu
-        - EXE_SUFFIX=-win32
+        - TARGET=i686-pc-windows-gnu
         - BINARY_EXTENSION=.exe
+      addons:
+        apt:
+          packages:
+          - gcc-mingw-w64-i686
     - stage: build
       name: "Windows (64bit)"
+      install: rustup target add i686-pc-windows-gnu
       env:
-        - CARGO_BUILD_TARGET=x86_64-pc-windows-gnu
-        - EXE_SUFFIX=-win64
+        - TARGET=x86_64-pc-windows-gnu
         - BINARY_EXTENSION=.exe
-os:
-- linux
-addons:
-  apt:
-    packages:
-    - gcc-mingw-w64-i686
-    - gcc-mingw-w64-x86-64
-    - libudev-dev
-cache: cargo
+      addons:
+        apt:
+          packages:
+          - gcc-mingw-w64-x86-64
+
 script:
-- cargo build
+  - cargo build --target $TARGET --verbose --release
 deploy:
   provider: releases
   api_key: "$GH_TOKEN"
   file:
-  - "target/$CARGO_BUILD_TARGET/release/ddcset-$TRAVIS_TAG$EXE_SUFFIX$BINARY_EXTENSION"
+  - "target/$TARGET/release/ddcset-stripped$BINARY_EXTENSION"
   cleanup: true
   on:
     tags: true
     condition: "$TRAVIS_RUST_VERSION = stable"
 before_deploy:
-  - cargo build --release
-  - strip -o "target/$CARGO_BUILD_TARGET/release/ddcset-$TRAVIS_TAG$EXE_SUFFIX$BINARY_EXTENSION" "target/$CARGO_BUILD_TARGET/release/ddcset$BINARY_EXTENSION"
+  - strip -o "target/$TARGET/release/ddcset-stripped$BINARY_EXTENSION" "target/$TARGET/release/ddcset$BINARY_EXTENSION"
