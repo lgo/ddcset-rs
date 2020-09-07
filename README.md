@@ -1,8 +1,10 @@
 # ddcset
 
-[![travis-badge][]][travis] [![release-badge][]][cargo] [![license-badge][]][license]
+[![travis-badge][]][travis] [![release-badge][]][release] [![license-badge][]][license]
 
 `ddcset` is an application for controlling connected monitors over DDC/CI.
+
+_Note: This fork was created to set up builds and provide a more recent version._
 
 
 ## Platforms
@@ -20,7 +22,7 @@ Currently supported platforms:
 
 ## Installation
 
-[Binaries are available on some platforms](https://github.com/arcnmx/ddcset-rs/releases).
+[Binaries are available on some platforms](https://github.com/lgo/ddcset-rs/releases).
 [Cargo](https://www.rust-lang.org/en-US/install.html) can also be used to install
 directly from source:
 
@@ -33,9 +35,9 @@ The NVIDIA Linux drivers have had broken DDC/CI support for years now. [There ar
 workarounds](http://www.ddcutil.com/nvidia/) but it seems that it is not
 currently possible to use DDC/CI over DisplayPort.
 
-[travis-badge]: https://img.shields.io/travis/arcnmx/ddcset-rs/master.svg?style=flat-square
-[travis]: https://travis-ci.org/arcnmx/ddcset-rs
-[release-badge]: https://img.shields.io/crates/v/ddcset.svg?style=flat-square
-[cargo]: https://crates.io/crates/ddcset
+[travis-badge]: https://img.shields.io/travis/lgo/ddcset-rs/master.svg?style=flat-square
+[travis]: https://travis-ci.org/github/lgo/ddcset-rs
+[release-badge]: https://img.shields.io/github/v/release/lgo/ddcset-rs.svg
+[release]: https://github.com/lgo/ddcset-rs/releases
 [license-badge]: https://img.shields.io/badge/license-MIT-ff69b4.svg?style=flat-square
 [license]: https://github.com/arcnmx/ddcset-rs/blob/master/COPYING

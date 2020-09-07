@@ -1,24 +1,20 @@
 [package]
 name = "ddcset"
-version = "0.0.3"
-authors = ["arcnmx"]
+version = "0.0.4"
+authors = ["arcnmx", "lgo"]
 
 description = "DDC/CI display control application"
 keywords = ["ddc", "vcp", "mccs", "ddccontrol", "ddcutil"]
 
-repository = "https://github.com/arcnmx/ddcset-rs"
+repository = "https://github.com/lgo/ddcset-rs"
 readme = "README.md"
 license = "MIT"
 
 [badges]
-travis-ci = { repository = "arcnmx/ddcset-rs" }
+travis-ci = { repository = "lgo/ddcset-rs" }
 maintenance = { status = "passively-maintained" }
 
 [profile.dev]
-panic = "abort"
-[profile.test]
-panic = "abort"
-[profile.bench]
 panic = "abort"
 [profile.release]
 panic = "abort"
